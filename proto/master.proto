@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "github.com/Purvav0511/distributed-file-system/proto";
+
+service Master {
+    rpc GetChunkLocations(GetChunkLocationsRequest) returns (GetChunkLocationsResponse);
+    rpc RegisterChunkServer(RegisterChunkServerRequest) returns (RegisterChunkServerResponse);
+    rpc Heartbeat(HeartbeatRequest) returns (HeartbeatResponse);
+}
+
+message GetChunkLocationsRequest {
+    string file_path = 1;
+}
+
+message GetChunkLocationsResponse {
+    repeated ChunkLocation locations = 1;
+}
+
+message RegisterChunkServerRequest {
+    string chunkserver_id = 1;
+}
+
+message RegisterChunkServerResponse {}
+
+message HeartbeatRequest {
+    string chunkserver_id = 1;
+}
+
+message HeartbeatResponse {}
+
+message ChunkLocation {
+    string chunk_id = 1;
+    string chunkserver_address = 2;
+}

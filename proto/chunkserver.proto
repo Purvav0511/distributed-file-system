@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = "github.com/Purvav0511/distributed-file-system/proto";
+
+service ChunkServer {
+    rpc ReadChunk(ReadChunkRequest) returns (ReadChunkResponse);
+    rpc WriteChunk(WriteChunkRequest) returns (WriteChunkResponse);
+}
+
+message ReadChunkRequest {
+    string chunk_id = 1;
+}
+
+message ReadChunkResponse {
+    bytes data = 1;
+}
+
+message WriteChunkRequest {
+    string chunk_id = 1;
+    bytes data = 2;
+}
+
+message WriteChunkResponse {}
